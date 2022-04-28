@@ -1,0 +1,59 @@
+﻿@model List<PruebaTecnica.Models.Duenio>
+@{
+    ViewData["Title"] = "Ingrese el nuevo Dueño";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+
+<form asp-action="Create">
+    <div class="mb-3 mt-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" placeholder="" name="name">
+         <label for="telefono" class="form-label">Telefono:</label>
+        <input type="text" class="form-control" id="telefono" placeholder="" name="telephone">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="" name="email">
+        <label for="cedula" class="form-label">Cédula:</label>
+        <input type="text" class="form-control" id="cedula" placeholder="" name="identificationNumber">
+        <label for="direccion" class="form-label">Dirección:</label>
+        <input type="text" class="form-control" id="direccion" placeholder="" name="Address">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<br />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Cédula</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Editar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var duenio in Model)
+        {
+            <tr>
+
+                <th scope="row">@duenio.Id</th>
+                <td scope="row">@duenio.Name</td>
+                 <td scope="row">@duenio.Telephone</td>
+                  <td scope="row">@duenio.Email</td>
+                   <td scope="row">@duenio.IdentificationNumber</td>
+                    <td scope="row">@duenio.Address</td>
+                <td scope="row"><a asp-action="Delete" class="btn btn-danger" asp-route-id="@duenio.Id">Eliminar</a>  </td>
+                <td scope="row"><a asp-action="Editar" class="btn btn-warning" asp-route-id="@duenio.Id" >Editar</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

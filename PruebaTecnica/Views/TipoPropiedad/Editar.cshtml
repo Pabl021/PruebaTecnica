@@ -1,0 +1,21 @@
+﻿@model List<PruebaTecnica.Models.TipoPropiedad>
+@{
+    ViewData["Title"] = "Editar tipo de propiedad";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+
+<form asp-controller="TipoPropiedad" asp-action="Editar">
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Tipo de propiedad:</label>
+        <input type="text"  class="form-control" id="descripcion" name="descripcion">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
+<br />
+
+
+
+
