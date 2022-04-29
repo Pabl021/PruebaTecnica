@@ -61,16 +61,16 @@ namespace PruebaTecnica.Controllers
             using (var db = new Models.Db.quercuContext())
             {
                 listDuenios = (from d in db.Owners
-                        select new Duenio
-                        {
-                            Id = d.Id,
-                            Name = d.Name,
-                            Telephone = d.Telephone,
-                            Email = d.Email,
-                            IdentificationNumber = d.IdentificationNumber,
-                            Address = d.Address
+                               select new Duenio
+                               {
+                                   Id = d.Id,
+                                   Name = d.Name,
+                                   Telephone = d.Telephone,
+                                   Email = d.Email,
+                                   IdentificationNumber = d.IdentificationNumber,
+                                   Address = d.Address
 
-                        }).ToList();
+                               }).ToList();
             }
             return listDuenios;
         }
@@ -91,7 +91,7 @@ namespace PruebaTecnica.Controllers
         public ActionResult Create(Propiedad p)
         {
             var newPro = new Property();
-            
+
             newPro.PropertyTypeId = p.PropertyTypeId;
             newPro.OwnerId = p.OwnerId;
             newPro.Number = p.Number;
@@ -105,7 +105,7 @@ namespace PruebaTecnica.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction(nameof(Index));
-            
+
         }
 
 

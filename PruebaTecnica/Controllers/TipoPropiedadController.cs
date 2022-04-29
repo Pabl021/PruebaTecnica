@@ -35,7 +35,7 @@ namespace PruebaTecnica.Controllers
         [HttpPost]
         public ActionResult Create(TipoPropiedad t)
         {
-           
+
             var newType = new PropertyType();
             newType.Description = t.Descripcion;
 

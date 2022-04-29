@@ -22,7 +22,7 @@ namespace PruebaTecnica.Controllers
                             Email = d.Email,
                             IdentificationNumber = d.IdentificationNumber,
                             Address = d.Address
-                            
+
                         }).ToList();
             }
             return View(list);
@@ -44,7 +44,7 @@ namespace PruebaTecnica.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction(nameof(Index));
-            
+
         }
 
         // GET: Duenio/Delete/5
@@ -84,7 +84,7 @@ namespace PruebaTecnica.Controllers
                             Email = info.Email,
                             IdentificationNumber = info.IdentificationNumber,
                             Address = info.Address
-                            
+
                         };
                         return View("Editar", result);
                     }
@@ -97,8 +97,8 @@ namespace PruebaTecnica.Controllers
         // POST: TipoPropiedadController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, 
-            [Bind("Id", "Name", "Telephone","Email", "IdentificationNumber", "Address")] Duenio du)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("Id", "Name", "Telephone", "Email", "IdentificationNumber", "Address")] Duenio du)
         {
             if (id != du.Id)
             {
@@ -115,11 +115,11 @@ namespace PruebaTecnica.Controllers
                         var duToUpdate = new Owner
                         {
                             Id = du.Id,
-                            Name=du.Name,
-                            Telephone=du.Telephone,
-                            Email=du.Email,
-                            IdentificationNumber=du.IdentificationNumber,
-                            Address=du.Address                           
+                            Name = du.Name,
+                            Telephone = du.Telephone,
+                            Email = du.Email,
+                            IdentificationNumber = du.IdentificationNumber,
+                            Address = du.Address
                         };
 
                         if (data == null)

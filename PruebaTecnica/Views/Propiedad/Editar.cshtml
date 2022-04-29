@@ -12,37 +12,37 @@
         <label for="propertyTypeId" class="form-label">Tipo de propiedad:</label>
 
 
-        <select name="propertyTypeId" class="form-select" data-val="true" data-val-required="The SelectedTag field is required." id="SelectedTag" >
+        <select name="propertyTypeId" class="form-select" data-val="true" data-val-required="The SelectedTag field is required." id="SelectedTag">
             @foreach (var pro in Model.TipoPropiedades)
             {
-                <option  value="@pro.Id">
-                     @pro.Descripcion
+                <option value="@pro.Id">
+                    @pro.Descripcion
                 </option>
 
             }
         </select>
-      
+
 
         <label for="ownerId" class="form-label">Dueño:</label>
 
         <select name="ownerId" class="form-select" data-val="true" data-val-required="The SelectedTag field is required." id="SelectedTag">
             @foreach (var du in Model.Duenio)
             {
-                <option  value="@du.Id">
-                     @du.Name
+                <option value="@du.Id">
+                    @du.Name
                 </option>
 
             }
         </select>
 
         <label for="number" class="form-label">Número:</label>
-        <input type="text" class="form-control" id="number" placeholder="" name="number"  value="@Model.Number">
+        <input type="text" class="form-control" id="number" placeholder="" name="number" value="@Model.Number">
         <label for="address" class="form-label">Dirección:</label>
         <input type="text" class="form-control" id="address" placeholder="" name="address" value="@Model.Address">
         <label for="area" class="form-label">Área:</label>
         <input type="text" class="form-control" id="area" placeholder="" name="area" value="@Model.Area">
         <label for="constructionArea" class="form-label">Área de construcción:</label>
-        <input type="text" class="form-control" id="constructionArea" placeholder="" name="constructionArea", value="@Model.ConstructionArea">
+        <input type="text" class="form-control" id="constructionArea" placeholder="" name="constructionArea" , value="@Model.ConstructionArea">
     </div>
 
     <button type="submit" class="btn btn-success">Guardar</button>
