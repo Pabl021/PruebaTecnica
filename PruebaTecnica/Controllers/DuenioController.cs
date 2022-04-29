@@ -50,9 +50,94 @@ namespace PruebaTecnica.Controllers
         // GET: Duenio/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            using (var db = new Models.Db.quercuContext())
+            {
+                var info = db.Owners.Find(id);
+                db.Owners.Remove(info);
+                db.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
         }
 
-      
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                using (var db = new Models.Db.quercuContext())
+                {
+                    var info = await db.Owners.FindAsync(id);
+                    if (info == null)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        var result = new Duenio()
+                        {
+                            Id = info.Id,
+                            Name = info.Name,
+                            Telephone = info.Telephone,
+                            Email = info.Email,
+                            IdentificationNumber = info.IdentificationNumber,
+                            Address = info.Address
+                            
+                        };
+                        return View("Editar", result);
+                    }
+                }
+
+            }
+
+        }
+
+        // POST: TipoPropiedadController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, 
+            [Bind("Id", "Name", "Telephone","Email", "IdentificationNumber", "Address")] Duenio du)
+        {
+            if (id != du.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    using (var db = new Models.Db.quercuContext())
+                    {
+                        var data = db.Owners.First(e => e.Id == id);
+
+                        var duToUpdate = new Owner
+                        {
+                            Id = du.Id,
+                            Name=du.Name,
+                            Telephone=du.Telephone,
+                            Email=du.Email,
+                            IdentificationNumber=du.IdentificationNumber,
+                            Address=du.Address                           
+                        };
+
+                        if (data == null)
+                        {
+                            return NotFound();
+                        }
+                        db.Entry(data).CurrentValues.SetValues(duToUpdate);
+                        await db.SaveChangesAsync();
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(du);
+        }
+
     }
 }

@@ -1,0 +1,87 @@
+﻿@model PruebaTecnica.Models.ResumenPropiedad
+@{
+    ViewData["Title"] = "Ingrese una nueva propiedad";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+
+<form asp-action="Create">
+    <div class="mb-3 mt-3">
+
+        <label for="propertyTypeId" class="form-label">Tipo de propiedad:</label>
+
+
+        <select name="propertyTypeId" class="form-select" data-val="true" data-val-required="The SelectedTag field is required." id="SelectedTag">
+            @foreach (var pro in Model.TipoPropiedades)
+            {
+                <option  value="@pro.Id">
+                     @pro.Descripcion
+                </option>
+
+            }
+        </select>
+      
+
+        <label for="ownerId" class="form-label">Dueño:</label>
+
+        <select name="ownerId" class="form-select" data-val="true" data-val-required="The SelectedTag field is required." id="SelectedTag">
+            @foreach (var du in Model.Duenio)
+            {
+                <option  value="@du.Id">
+                     @du.Name
+                </option>
+
+            }
+        </select>
+
+        <label for="number" class="form-label">Número:</label>
+        <input type="text" class="form-control" id="number" placeholder="" name="number">
+        <label for="address" class="form-label">Dirección:</label>
+        <input type="text" class="form-control" id="address" placeholder="" name="address">
+        <label for="area" class="form-label">Área:</label>
+        <input type="text" class="form-control" id="area" placeholder="" name="area">
+        <label for="constructionArea" class="form-label">Área de construcción:</label>
+        <input type="text" class="form-control" id="constructionArea" placeholder="" name="constructionArea">
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+<br />
+
+
+<table class="table">
+    <thead>
+        <tr>
+           @* <th scope="col">ID</th>*@
+            <th scope="col">Tipo de propiedad</th>
+            <th scope="col">Dueño</th>
+            <th scope="col">Número</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Área del terreno</th>
+            <th scope="col">Área del construcción</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Editar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var pro in Model.Propiedades)
+        {
+            <tr>
+
+               @* <th scope="row">@pro.Id</th>*@
+                <td scope="row">@pro.PropertyTypeId</td>
+                <td scope="row">@pro.OwnerId</td>
+                <td scope="row">@pro.Number</td>
+                <td scope="row">@pro.Address</td>
+                <td scope="row">@pro.Area</td>
+                <td scope="row">@pro.ConstructionArea</td>
+                <td scope="row"><a asp-action="Delete" class="btn btn-danger" asp-route-id="@pro.Id">🗑️</a>  </td>
+                <td scope="row"><a asp-action="Edit" class="btn btn-info" asp-route-id="@pro.Id">
+🖊️</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>

@@ -12,6 +12,7 @@ namespace PruebaTecnica.Controllers
         public ActionResult Index()
         {
             List<TipoPropiedad> list = new List<TipoPropiedad>();
+
             using (var db = new Models.Db.quercuContext())
             {
                 list = (from d in db.PropertyTypes
@@ -49,7 +50,7 @@ namespace PruebaTecnica.Controllers
 
 
 
-       // GET: TipoPropiedadController/Edit/5
+        // GET: TipoPropiedadController/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,7 +68,12 @@ namespace PruebaTecnica.Controllers
                     }
                     else
                     {
-                        return View(info);
+                        var result = new TipoPropiedad()
+                        {
+                            Id = info.Id,
+                            Descripcion = info.Description
+                        };
+                        return View("Editar", result);
                     }
                 }
 
@@ -80,7 +86,7 @@ namespace PruebaTecnica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id", "Descripcion")] TipoPropiedad tp)
         {
-           if(id != tp.Id)
+            if (id != tp.Id)
             {
                 return NotFound();
             }
@@ -90,10 +96,23 @@ namespace PruebaTecnica.Controllers
                 {
                     using (var db = new Models.Db.quercuContext())
                     {
-                        db.Update(tp);
+                        var entry = db.PropertyTypes.First(e => e.Id == id);
+
+                        var tpToUpdate = new PropertyType
+                        {
+                            Id = tp.Id,
+                            Description = tp.Descripcion
+                        };
+
+                        if (entry == null)
+                        {
+                            return NotFound();
+                        }
+                        db.Entry(entry).CurrentValues.SetValues(tpToUpdate);
                         await db.SaveChangesAsync();
                     }
-                } catch (DbUpdateConcurrencyException)
+                }
+                catch (DbUpdateConcurrencyException)
                 {
                     return NotFound();
                 }
